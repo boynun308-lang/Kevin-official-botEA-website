@@ -12,74 +12,46 @@ body{
   margin:0;
 }
 
-/* HEADER */
-.header{
-  background:#1e5eff;
+header{
+  background:#2563eb;
   color:white;
-  padding:15px;
   text-align:center;
+  padding:15px;
+  font-size:20px;
   font-weight:bold;
-  font-size:18px;
 }
 
-/* GRID */
 .container{
   display:grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns:1fr 1fr;
   gap:15px;
   padding:15px;
 }
 
-/* CARD */
 .card{
   background:white;
   border-radius:15px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
   overflow:hidden;
-  position:relative;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* HOT TAG */
-.hot{
-  position:absolute;
-  top:10px;
-  left:10px;
-  background:red;
-  color:white;
-  padding:5px 10px;
-  border-radius:20px;
-  font-size:12px;
-}
-
-/* IMAGE */
 .card img{
   width:100%;
-  height:180px;
+  height:160px;
   object-fit:cover;
 }
 
-/* BODY */
-.card-body{
+.content{
   padding:10px;
 }
 
 .title{
   font-weight:bold;
-  margin-bottom:5px;
+  font-size:16px;
 }
 
-.sub{
-  font-size:12px;
-  color:gray;
-}
-
-/* PRICE */
 .price{
-  margin-top:5px;
-}
-
-.new{
-  color:#1e5eff;
+  color:#2563eb;
   font-size:18px;
   font-weight:bold;
 }
@@ -90,222 +62,80 @@ body{
   margin-left:5px;
 }
 
-/* STATUS */
-.status{
-  margin:8px 0;
-  font-size:12px;
-}
-
-.stock{
-  background:#d4f5e3;
+.badge{
+  display:inline-block;
+  background:#dcfce7;
+  color:#15803d;
   padding:3px 8px;
   border-radius:10px;
-  color:green;
+  font-size:12px;
+  margin-top:5px;
 }
 
-.instant{
-  margin-left:10px;
-}
-
-/* BUTTON */
 .btn{
-  width:100%;
-  padding:10px;
-  border:none;
-  border-radius:10px;
-  background:#1e5eff;
+  margin-top:10px;
+  display:block;
+  background:#2563eb;
   color:white;
-  font-weight:bold;
-}
-
-/* POPUP */
-.popup{
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.7);
-  justify-content:center;
-  align-items:center;
-}
-
-.popup-box{
-  background:white;
-  border-radius:15px;
-  padding:20px;
   text-align:center;
-  width:300px;
+  padding:10px;
+  border-radius:10px;
+  text-decoration:none;
 }
-
-.popup-box img{
-  width:200px;
-}
-
-.timer{
-  color:red;
-  margin-top:10px;
-}
-
-/* DOWNLOAD */
-.download{
-  display:none;
-  background:green;
-  margin-top:10px;
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="header">🚀 Kevin Bot EA Store</div>
+<header>🚀 Kevin Bot EA Store</header>
 
 <div class="container">
 
-<!-- 1 -->
+<!-- VIP -->
 <div class="card">
-  <div class="hot">HOT</div>
-  <img src="vip.jpg">
-  <div class="card-body">
+  <img src="vip.jpg.png">
+  <div class="content">
     <div class="title">Kevin Bot EA VIP</div>
-    <div class="sub">Forex Trading / Automation</div>
-
-    <div class="price">
-      <span class="new">$35</span>
-      <span class="old">$50</span>
-    </div>
-
-    <div class="status">
-      <span class="stock">✔ In Stock</span>
-      <span class="instant">⚡ Instant</span>
-    </div>
-
-    <button class="btn" onclick="buy()">Buy Now</button>
+    <div class="price">$35 <span class="old">$50</span></div>
+    <div class="badge">✔ In Stock ⚡ Instant</div>
+    <a href="#" class="btn">Buy Now</a>
   </div>
 </div>
 
-<!-- 2 -->
+<!-- Scalping -->
 <div class="card">
-  <div class="hot">HOT</div>
-  <img src="scalping.jpg">
-  <div class="card-body">
+  <img src="scalping.jpg.png">
+  <div class="content">
     <div class="title">Kevin Bot EA Pro Scalping</div>
-    <div class="sub">Forex Trading / Automation</div>
-
-    <div class="price">
-      <span class="new">$35</span>
-      <span class="old">$50</span>
-    </div>
-
-    <div class="status">
-      <span class="stock">✔ In Stock</span>
-      <span class="instant">⚡ Instant</span>
-    </div>
-
-    <button class="btn" onclick="buy()">Buy Now</button>
+    <div class="price">$35 <span class="old">$50</span></div>
+    <div class="badge">✔ In Stock ⚡ Instant</div>
+    <a href="#" class="btn">Buy Now</a>
   </div>
 </div>
 
-<!-- 3 -->
+<!-- Auto -->
 <div class="card">
-  <div class="hot">HOT</div>
-  <img src="auto.jpg">
-  <div class="card-body">
+  <img src="auto.jpg.png">
+  <div class="content">
     <div class="title">Kevin Bot Trading Auto VIP</div>
-    <div class="sub">Forex Trading / Automation</div>
-
-    <div class="price">
-      <span class="new">$35</span>
-      <span class="old">$50</span>
-    </div>
-
-    <div class="status">
-      <span class="stock">✔ In Stock</span>
-      <span class="instant">⚡ Instant</span>
-    </div>
-
-    <button class="btn" onclick="buy()">Buy Now</button>
+    <div class="price">$35 <span class="old">$50</span></div>
+    <div class="badge">✔ In Stock ⚡ Instant</div>
+    <a href="#" class="btn">Buy Now</a>
   </div>
 </div>
 
-<!-- 4 -->
+<!-- Official -->
 <div class="card">
-  <div class="hot">HOT</div>
-  <img src="official.jpg">
-  <div class="card-body">
+  <img src="official.jpg.png">
+  <div class="content">
     <div class="title">Kevin Official Bot EA</div>
-    <div class="sub">Forex Trading / Automation</div>
-
-    <div class="price">
-      <span class="new">$35</span>
-      <span class="old">$50</span>
-    </div>
-
-    <div class="status">
-      <span class="stock">✔ In Stock</span>
-      <span class="instant">⚡ Instant</span>
-    </div>
-
-    <button class="btn" onclick="buy()">Buy Now</button>
+    <div class="price">$35 <span class="old">$50</span></div>
+    <div class="badge">✔ In Stock ⚡ Instant</div>
+    <a href="#" class="btn">Buy Now</a>
   </div>
 </div>
 
 </div>
-
-<!-- POPUP -->
-<div class="popup" id="popup">
-  <div class="popup-box">
-    <h3>Scan KHQR</h3>
-    <p>$35</p>
-
-    <img src="qr.png">
-
-    <div class="timer" id="timer">05:00</div>
-
-    <button class="btn" onclick="confirmPay()">I Paid</button>
-
-    <a href="EA.zip" download>
-      <button class="btn download" id="downloadBtn">Download Bot</button>
-    </a>
-
-  </div>
-</div>
-
-<script>
-let time = 300;
-let timer;
-
-function buy(){
-  document.getElementById("popup").style.display="flex";
-  startTimer();
-}
-
-function startTimer(){
-  timer = setInterval(()=>{
-    let min = Math.floor(time/60);
-    let sec = time%60;
-
-    document.getElementById("timer").innerText =
-    (min<10?"0":"")+min+":"+(sec<10?"0":"")+sec;
-
-    time--;
-
-    if(time<0){
-      clearInterval(timer);
-      alert("❌ Time expired");
-      location.reload();
-    }
-  },1000);
-}
-
-function confirmPay(){
-  clearInterval(timer);
-  document.getElementById("downloadBtn").style.display="block";
-  alert("✅ Payment confirmed!");
-}
-</script>
 
 </body>
 </html>

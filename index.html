@@ -85,11 +85,9 @@
 
     <!-- FORM -->
     <form action="https://formspree.io/f/xojyenok"
-          method="POST"
-          enctype="multipart/form-data"
-          onsubmit="sendTelegram()">
-
-      <input type="file" name="file" required>
+      method="POST"
+      enctype="multipart/form-data"
+      onsubmit="sendTelegram(); setTimeout(openBot, 1000);">
 
       <br><br>
 
@@ -128,8 +126,9 @@ function startTimer(){
   },1000);
 }
 
-/* 🔥 TELEGRAM NOTIFY */
-function sendTelegram(){
+function openBot(){
+  window.open("https://t.me/https://t.me/kevin_bot_ea_botstart=buy", "_blank");
+}
 
   let token = "8355272068:AAFY6kKYYkbZgK9KP_e0_HwO-IhBCCNtzOo";
   let chat_id = "8451417510";
@@ -139,7 +138,7 @@ function sendTelegram(){
   let url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(message)}`;
 
   fetch(url);
-}
+}៩
 
 </script>
 

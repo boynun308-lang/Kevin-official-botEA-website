@@ -164,35 +164,69 @@ header{
 </div>
 
 <!-- POPUP -->
-<div id="popup">
-  <div class="popup-box">
+<div id="popup" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+justify-content:center;
+align-items:center;
+">
 
-    <h3>💰 Pay $35</h3>
+  <div style="
+  background:white;
+  padding:20px;
+  border-radius:20px;
+  text-align:center;
+  width:320px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  ">
 
-    <img src="qr.jpg"><br><br>
+    <h2>💰 Pay $35</h2>
 
-    <input type="file" id="file"><br><br>
+    <img src="./qr.jpg" style="
+      width:220px;
+      border-radius:10px;
+      margin:10px 0;
+    ">
+
+    <p style="font-size:13px;color:gray;">
+      Scan QR with ABA / KHQR
+    </p>
+
+    <input type="file" id="file" style="
+      margin-top:10px;
+    ">
 
     <button onclick="confirmPay()" style="
-      padding:10px;
+      margin-top:15px;
+      padding:12px;
       width:100%;
       background:#2563eb;
       color:white;
       border:none;
       border-radius:10px;
-    ">Submit</button>
-
-    <br><br>
+      font-size:16px;
+    ">
+      Confirm Payment
+    </button>
 
     <a id="downloadLink" href="EA.mq5" download style="display:none;">
       <button style="
-        padding:10px;
+        margin-top:10px;
+        padding:12px;
         width:100%;
         background:green;
         color:white;
         border:none;
         border-radius:10px;
-      ">Download Bot</button>
+        font-size:16px;
+      ">
+        ⬇ Download Bot
+      </button>
     </a>
 
   </div>
@@ -200,6 +234,7 @@ header{
 
 <script>
 
+<script>
 function buy(){
   document.getElementById("popup").style.display="flex";
 }
@@ -214,7 +249,7 @@ function confirmPay(){
     document.getElementById("downloadLink").style.display="block";
   }
 }
-
+</script>
 </script>
 
 </body>

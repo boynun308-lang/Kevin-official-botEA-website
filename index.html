@@ -8,12 +8,26 @@
       background: #ffffff;
       font-family: Arial;
       margin: 0;
-      text-align: center;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+      background: #007bff;
+      color: white;
+    }
+
+    .cart {
+      background: white;
+      color: #007bff;
+      padding: 5px 10px;
+      border-radius: 10px;
     }
 
     h1 {
-      margin: 20px;
-      color: #222;
+      text-align: center;
+      margin: 15px;
     }
 
     .grid {
@@ -27,18 +41,13 @@
       background: #f5f5f5;
       border-radius: 15px;
       padding: 10px;
+      text-align: center;
       box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-      position: relative;
     }
 
     .card img {
       width: 100%;
       border-radius: 10px;
-    }
-
-    .title {
-      font-weight: bold;
-      margin-top: 10px;
     }
 
     .price {
@@ -55,18 +64,28 @@
       width: 100%;
       border-radius: 8px;
       margin-top: 10px;
-      font-size: 16px;
+      cursor: pointer;
     }
 
-    .hot {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: red;
-      color: white;
-      padding: 5px 10px;
+    .checkout {
+      background: #f0f0f0;
+      margin: 15px;
+      padding: 15px;
       border-radius: 10px;
-      font-size: 12px;
+    }
+
+    .total {
+      font-size: 20px;
+      margin: 10px 0;
+      color: #007bff;
+    }
+
+    .pay {
+      background: red;
+    }
+
+    .telegram {
+      background: #0088cc;
     }
 
     /* QR Popup */
@@ -80,70 +99,102 @@
       align-items: center;
     }
 
-    .popup-box {
+    .popup {
       background: white;
       padding: 20px;
       border-radius: 10px;
       text-align: center;
     }
 
-    .popup-box img {
+    .popup img {
       width: 200px;
-      margin: 10px 0;
     }
 
-    .close-btn {
-      background: red;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-    }
   </style>
 </head>
 
 <body>
 
-<h1>🚀 Kevin Bot EA Store</h1>
+<header>
+  <div>🚀 Kevin Store</div>
+  <div class="cart">🛒 $<span id="total">0</span></div>
+</header>
+
+<h1>Kevin Bot EA Products</h1>
 
 <div class="grid">
 
-  <!-- PRODUCT 1 -->
   <div class="card">
-    <span class="hot">HOT</span>
     <img src="IMG_0281.jpeg">
-    <div class="title">EA Gold Scalping</div>
+    <h3>EA Gold Scalping</h3>
     <div class="price">$50</div>
-    <button onclick="openQR()">Buy Now</button>
+    <button onclick="add('EA Gold',50)">Add to Cart</button>
   </div>
 
-  <!-- PRODUCT 2 -->
   <div class="card">
-    <span class="hot">HOT</span>
     <img src="IMG_0281.jpeg">
-    <div class="title">EA XAUUSD Pro</div>
+    <h3>EA XAUUSD Pro</h3>
     <div class="price">$100</div>
-    <button onclick="openQR()">Buy Now</button>
+    <button onclick="add('EA XAUUSD',100)">Add to Cart</button>
   </div>
 
+</div>
+
+<!-- CHECKOUT -->
+<div class="checkout">
+  <h3>Total Amount</h3>
+  <div class="total">$<span id="sum">0</span></div>
+
+  <button class="pay" onclick="pay()">💰 Pay with KHQR</button>
+
+  <button class="telegram" onclick="telegram()">📩 Send Telegram</button>
 </div>
 
 <!-- QR POPUP -->
 <div id="qrPopup">
-  <div class="popup-box">
+  <div class="popup">
     <h2>Scan ABA to Pay</h2>
     <img src="IMG_0281.jpeg">
-    <br>
-    <button class="close-btn" onclick="closeQR()">Close</button>
+    <br><br>
+    <button onclick="closeQR()">Close</button>
   </div>
 </div>
 
 <script>
-function openQR() {
-  document.getElementById("qrPopup").style.display = "flex";
+let total = 0;
+let items = [];
+
+function add(name, price){
+  total += price;
+  items.push(name + " $" + price);
+
+  document.getElementById("total").innerText = total;
+  document.getElementById("sum").innerText = total;
 }
-function closeQR() {
+
+function pay(){
+  if(total == 0){
+    alert("No item selected!");
+  }else{
+    document.getElementById("qrPopup").style.display = "flex";
+  }
+}
+
+function closeQR(){
   document.getElementById("qrPopup").style.display = "none";
+}
+
+function telegram(){
+  if(total == 0){
+    alert("No order!");
+    return;
+  }
+
+  let text = "Order:\n" + items.join("\n") + "\nTotal: $" + total;
+
+  let url = "https://t.me/kevinofficialboteatext=" + encodeURIComponent(text);
+
+  window.open(url, "_blank");
 }
 </script>
 

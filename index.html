@@ -6,8 +6,23 @@
   <style>
     body {
       font-family: Arial;
+      background: #ffffff;
       text-align: center;
-      background: white;
+      margin: 0;
+    }
+
+    header {
+      background: #007bff;
+      color: white;
+      padding: 15px;
+      font-size: 20px;
+    }
+
+    .card {
+      background: #f5f5f5;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 10px;
     }
 
     button {
@@ -16,43 +31,101 @@
       color: white;
       border: none;
       margin-top: 10px;
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    #popup {
+      display: none;
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.7);
+      justify-content:center;
+      align-items:center;
     }
 
     .box {
-      background: #f5f5f5;
+      background: white;
       padding: 20px;
       border-radius: 10px;
-      margin: 20px;
+      width: 90%;
+      max-width: 300px;
     }
+
+    #timer {
+      color:red;
+      font-weight:bold;
+    }
+
   </style>
 </head>
 
 <body>
 
-<h1>🚀 KEVIN BOT EA VIP</h1>
-<h2>$35</h2>
+<header>🚀 Kevin Bot EA Store</header>
 
-<div class="box">
+<div class="card">
+  <h2>KEVIN BOT EA VIP</h2>
+  <h1>$35</h1>
 
-  <h3>Scan ABA</h3>
-  <img src="IMG_0281.jpeg" width="200">
-
-  <p>Upload receipt</p>
-
-  <!-- FORM -->
-  <form action="https://formspree.io/f/yourID" method="POST" enctype="multipart/form-data">
-    
-    <input type="file" name="file" required>
-
-    <br><br>
-
-    <button type="submit">Submit Payment</button>
-
-  </form>
-
+  <button onclick="buy()">Buy Now</button>
 </div>
 
-<p>📩 After submit, admin will send your bot</p>
+<!-- POPUP -->
+<div id="popup">
+  <div class="box">
+
+    <h2>Scan ABA</h2>
+    <img src="IMG_0281.jpeg" width="200">
+
+    <p>⏱ Time left: <span id="timer">05:00</span></p>
+
+    <p>Upload receipt</p>
+
+    <!-- ✅ FORMSPREE READY -->
+    <form action="https://formspree.io/f/xojyenok" method="POST" enctype="multipart/form-data">
+      
+      <input type="file" name="file" required>
+
+      <br><br>
+
+      <button type="submit">Submit Payment</button>
+
+    </form>
+
+  </div>
+</div>
+
+<script>
+
+let time = 300;
+
+function buy(){
+  document.getElementById("popup").style.display="flex";
+  startTimer();
+}
+
+function startTimer(){
+  let timer = setInterval(()=>{
+    let min = Math.floor(time/60);
+    let sec = time % 60;
+
+    document.getElementById("timer").innerText =
+      (min<10?"0":"")+min+":"+(sec<10?"0":"")+sec;
+
+    time--;
+
+    if(time < 0){
+      clearInterval(timer);
+      alert("❌ Time expired!");
+      location.reload();
+    }
+
+  },1000);
+}
+
+</script>
 
 </body>
 </html>

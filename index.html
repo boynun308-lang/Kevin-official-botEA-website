@@ -2,33 +2,93 @@
 <html>
 <head>
   <title>Kevin Official Bot EA</title>
+
   <style>
     body {
-      background: black;
+      background: #0b0b0b;
+      font-family: Arial;
       color: white;
       text-align: center;
-      font-family: Arial;
-      margin-top: 100px;
     }
+
     h1 {
-      font-size: 40px;
       color: gold;
+      margin-top: 30px;
     }
-    p {
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: #1a1a1a;
+      width: 250px;
+      border-radius: 10px;
+      padding: 15px;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .price {
+      color: gold;
       font-size: 20px;
+      margin: 10px 0;
     }
-    button {
-      padding: 10px 20px;
+
+    .btn {
       background: gold;
       border: none;
-      font-size: 18px;
+      padding: 10px;
+      width: 100%;
       cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
     }
+
+    .btn:hover {
+      background: orange;
+    }
+
   </style>
 </head>
-<body><h2>💰 Payment ABA</h2>
 
-<img src="aba.png" width="200">
+<body>
 
-<p>Scan to pay via ABA</p>
+<h1>🚀 Kevin Bot EA Store</h1>
+
+<div class="container">
+
+  <!-- PRODUCT 1 -->
+  <div class="card">
+    <img src="IMG_0281.jpeg">
+    <h3>EA Gold Scalping</h3>
+    <div class="price">$50</div>
+    <button class="btn" onclick="alert('Scan ABA to pay')">Buy Now</button>
+  </div>
+
+  <!-- PRODUCT 2 -->
+  <div class="card">
+    <img src="IMG_0281.jpeg">
+    <h3>EA XAUUSD Pro</h3>
+    <div class="price">$100</div>
+    <button class="btn" onclick="alert('Scan ABA to pay')">Buy Now</button>
+  </div>
+
+</div>
+
+<!-- ABA PAYMENT -->
+<h2 style="margin-top:40px;">💰 Pay via ABA</h2>
+
+<img src="IMG_0281.jpeg" width="200">
+
+<p>Scan & send payment, then contact Telegram</p>
+
+</body>
 </html>

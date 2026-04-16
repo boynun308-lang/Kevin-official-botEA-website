@@ -33,6 +33,7 @@
       margin-top: 10px;
       width: 100%;
       border-radius: 5px;
+      font-size: 16px;
     }
 
     #popup {
@@ -50,14 +51,13 @@
       padding: 20px;
       border-radius: 10px;
       width: 90%;
-      max-width: 300px;
+      max-width: 320px;
     }
 
     #timer {
       color:red;
       font-weight:bold;
     }
-
   </style>
 </head>
 
@@ -76,16 +76,19 @@
 <div id="popup">
   <div class="box">
 
-    <h2>Scan ABA</h2>
+    <h2>Scan ABA to Pay</h2>
     <img src="IMG_0281.jpeg" width="200">
 
     <p>⏱ Time left: <span id="timer">05:00</span></p>
 
-    <p>Upload receipt</p>
+    <p>Upload payment receipt</p>
 
-    <!-- ✅ FORMSPREE READY -->
-    <form action="https://formspree.io/f/xojyenok" method="POST" enctype="multipart/form-data">
-      
+    <!-- FORM -->
+    <form action="https://formspree.io/f/xojyenok"
+          method="POST"
+          enctype="multipart/form-data"
+          onsubmit="sendTelegram()">
+
       <input type="file" name="file" required>
 
       <br><br>
@@ -123,6 +126,19 @@ function startTimer(){
     }
 
   },1000);
+}
+
+/* 🔥 TELEGRAM NOTIFY */
+function sendTelegram(){
+
+  let token = "8355272068:AAFY6kKYYkbZgK9KP_e0_HwO-IhBCCNtzOo";
+  let chat_id = "8451417510";
+
+  let message = "🚀 NEW PAYMENT!\nKevin Bot EA VIP ($35)\nCheck email for receipt.";
+
+  let url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(message)}`;
+
+  fetch(url);
 }
 
 </script>

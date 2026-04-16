@@ -5,44 +5,35 @@
 
   <style>
     body {
-      background: #ffffff;
+      background: white;
       font-family: Arial;
       margin: 0;
     }
 
     header {
-      display: flex;
-      justify-content: space-between;
-      padding: 15px;
       background: #007bff;
       color: white;
-    }
-
-    .cart {
-      background: white;
-      color: #007bff;
-      padding: 5px 10px;
-      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
     }
 
     h1 {
       text-align: center;
-      margin: 15px;
+      margin: 20px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2,1fr);
       gap: 15px;
       padding: 15px;
     }
 
     .card {
       background: #f5f5f5;
-      border-radius: 15px;
       padding: 10px;
+      border-radius: 15px;
       text-align: center;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     }
 
     .card img {
@@ -53,7 +44,7 @@
     .price {
       color: #007bff;
       font-size: 18px;
-      margin: 5px 0;
+      margin: 5px;
     }
 
     button {
@@ -64,50 +55,36 @@
       width: 100%;
       border-radius: 8px;
       margin-top: 10px;
-      cursor: pointer;
     }
 
-    .checkout {
-      background: #f0f0f0;
-      margin: 15px;
-      padding: 15px;
-      border-radius: 10px;
+    /* POPUP */
+    #popup {
+      display: none;
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.7);
+      justify-content:center;
+      align-items:center;
     }
 
-    .total {
-      font-size: 20px;
-      margin: 10px 0;
-      color: #007bff;
+    .box {
+      background:white;
+      padding:20px;
+      border-radius:10px;
+      text-align:center;
     }
 
-    .pay {
-      background: red;
+    .box img {
+      width:200px;
     }
 
     .telegram {
-      background: #0088cc;
+      background:#0088cc;
     }
 
-    /* QR Popup */
-    #qrPopup {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .popup {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    .popup img {
-      width: 200px;
+    .close {
+      background:red;
     }
 
   </style>
@@ -115,88 +92,64 @@
 
 <body>
 
-<header>
-  <div>🚀 Kevin Store</div>
-  <div class="cart">🛒 $<span id="total">0</span></div>
-</header>
+<header>🚀 Kevin Bot EA Store</header>
 
-<h1>Kevin Bot EA Products</h1>
+<h1>Premium EA Bots</h1>
 
 <div class="grid">
 
-  <div class="card">
-  <img src="IMG_0281.jpeg">
-
-  <h3>KEVIN BOT EA VIP</h3>
-  <div class="price">$50</div>
-
-  <a href="KEVIN%20BOT%20EA%20VIP.mq5" download>
-    <button>⬇️ Download EA</button>
-  </a>
-</div>
-
+  <!-- PRODUCT 1 -->
   <div class="card">
     <img src="IMG_0281.jpeg">
-    <h3>EA XAUUSD Pro</h3>
-    <div class="price">$100</div>
-    <button onclick="add('EA XAUUSD',100)">Add to Cart</button>
+    <h3>KEVIN BOT EA VIP</h3>
+    <div class="price">$50</div>
+
+    <button onclick="buy('KEVIN BOT EA VIP',50)">
+      Buy Now
+    </button>
   </div>
 
 </div>
 
-<!-- CHECKOUT -->
-<div class="checkout">
-  <h3>Total Amount</h3>
-  <div class="total">$<span id="sum">0</span></div>
-
-  <button class="pay" onclick="pay()">💰 Pay with KHQR</button>
-
-  <button class="telegram" onclick="telegram()">📩 Send Telegram</button>
-</div>
-
-<!-- QR POPUP -->
-<div id="qrPopup">
-  <div class="popup">
+<!-- POPUP -->
+<div id="popup">
+  <div class="box">
     <h2>Scan ABA to Pay</h2>
+
     <img src="IMG_0281.jpeg">
+
+    <p>After payment, send screenshot</p>
+
+    <button class="telegram" onclick="sendTelegram()">📩 Send Proof</button>
+
     <br><br>
-    <button onclick="closeQR()">Close</button>
+
+    <button class="close" onclick="closePop()">Close</button>
   </div>
 </div>
 
 <script>
-let total = 0;
-let items = [];
+let product = "";
+let price = 0;
 
-function add(name, price){
-  total += price;
-  items.push(name + " $" + price);
+function buy(name, p){
+  product = name;
+  price = p;
 
-  document.getElementById("total").innerText = total;
-  document.getElementById("sum").innerText = total;
+  document.getElementById("popup").style.display = "flex";
 }
 
-function pay(){
-  if(total == 0){
-    alert("No item selected!");
-  }else{
-    document.getElementById("qrPopup").style.display = "flex";
-  }
+function closePop(){
+  document.getElementById("popup").style.display = "none";
 }
 
-function closeQR(){
-  document.getElementById("qrPopup").style.display = "none";
-}
+function sendTelegram(){
 
-function telegram(){
-  if(total == 0){
-    alert("No order!");
-    return;
-  }
+  let text = "Hello, I paid $" + price + " for " + product;
 
-  let text = "Order:\n" + items.join("\n") + "\nTotal: $" + total;
+  let username = "kevinofficialbotea"; // 👉 ប្ដូរនេះ
 
-  let url = "https://t.me/kevinofficialboteatext=" + encodeURIComponent(text);
+  let url = "https://t.me/" + username + https://t.me/kevinofficialbotea"?text=" + encodeURIComponent(text);
 
   window.open(url, "_blank");
 }

@@ -85,12 +85,27 @@
 
 </div>
 
-<!-- ABA PAYMENT -->
-<h2 style="margin-top:40px;">💰 Pay via ABA</h2>
-
-<img id="aba" src="IMG_0281.jpeg" width="200">
-
-<p>Scan & send payment, then contact Telegram</p>
-
+<div id="qrPopup" style="
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.8);
+  justify-content:center;
+  align-items:center;
+">
+  <div style="background:#111; padding:20px; border-radius:10px; text-align:center;">
+    <h2 style="color:gold;">Scan ABA to Pay</h2>
+    <img src="IMG_0281.jpeg" style="width:200px; margin:10px 0;">
+    <br>
+    <button onclick="closeQR()" style="
+      padding:10px 20px;
+      background:red;
+      color:white;
+      border:none;
+      border-radius:5px;
+    ">Close</button>
+  </div>
+</div>
 </body>
 </html>

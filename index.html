@@ -6,215 +6,251 @@
 <title>Kevin Bot EA</title>
 
 <style>
-body{font-family:Arial;margin:0;background:#f5f7fb}
-
-/* LOGIN */
-#loginBox{
-height:100vh;display:flex;justify-content:center;align-items:center;
+body{
+  font-family:Arial;
+  background:#eef2f7;
+  margin:0;
 }
-.login{
-background:white;padding:25px;border-radius:15px;width:300px;text-align:center;
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
-}
-input{width:100%;padding:10px;margin-top:10px;border-radius:8px;border:1px solid #ddd}
-button{padding:10px;margin-top:10px;width:100%;background:#2563eb;color:white;border:none;border-radius:10px}
 
-/* APP */
-#app{display:none}
-
+/* HEADER */
 header{
-background:#2563eb;color:white;text-align:center;padding:15px;font-size:20px
+  background:#2563eb;
+  color:white;
+  text-align:center;
+  padding:15px;
+  font-size:20px;
+  font-weight:bold;
 }
 
-/* MENU */
-.menu-btn{
-position:fixed;top:15px;left:15px;background:#2563eb;color:white;
-border:none;padding:10px;border-radius:10px;z-index:999;
+/* GRID */
+.container{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  padding:15px;
 }
 
-#menu{
-position:fixed;top:0;left:-270px;width:270px;height:100%;
-background:white;box-shadow:5px 0 20px rgba(0,0,0,0.2);
-transition:0.3s;z-index:999;
-}
-
-.profile{
-background:#2563eb;color:white;padding:20px;text-align:center
-}
-
-.menu-item{padding:12px;cursor:pointer}
-.menu-item:hover{background:#f1f5f9}
-
-/* STORE */
-.container{padding:15px}
+/* CARD */
 .card{
-background:white;border-radius:15px;margin-bottom:15px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);overflow:hidden;
+  background:white;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  position:relative;
 }
-.card img{width:100%;height:150px;object-fit:cover}
-.card-body{padding:10px}
-.btn{display:block;background:#2563eb;color:white;padding:10px;text-align:center;border-radius:10px;margin-top:10px}
+
+/* HOT BADGE */
+.hot{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:#ff3b3b;
+  color:white;
+  padding:4px 10px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+/* IMAGE */
+.card img{
+  width:100%;
+  height:130px;
+  object-fit:cover;
+}
+
+/* CONTENT */
+.content{
+  padding:10px;
+}
+
+.category{
+  font-size:12px;
+  color:gray;
+}
+
+.title{
+  font-weight:bold;
+  margin-top:3px;
+}
+
+.price{
+  color:#2563eb;
+  font-weight:bold;
+  font-size:16px;
+}
+
+.old{
+  text-decoration:line-through;
+  color:gray;
+  font-size:12px;
+  margin-left:5px;
+}
+
+/* STATUS */
+.status{
+  display:flex;
+  justify-content:space-between;
+  margin-top:5px;
+  font-size:12px;
+}
+
+.stock{
+  background:#dcfce7;
+  color:#15803d;
+  padding:3px 8px;
+  border-radius:10px;
+}
+
+.instant{
+  color:#f59e0b;
+}
+
+/* BUTTON */
+.btn{
+  margin-top:10px;
+  display:block;
+  background:#2563eb;
+  color:white;
+  text-align:center;
+  padding:10px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:bold;
+}
 
 /* POPUP */
 #popup{
-display:none;position:fixed;top:0;left:0;width:100%;height:100%;
-background:rgba(0,0,0,0.6);justify-content:center;align-items:center;
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.6);
+  justify-content:center;
+  align-items:center;
 }
+
 .popup-box{
-background:white;padding:20px;border-radius:15px;text-align:center;width:300px;
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  text-align:center;
+  width:300px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div id="loginBox">
-<div class="login">
-<h2>🔐 Login</h2>
-<input type="email" id="email" placeholder="Gmail">
-<input type="password" id="pass" placeholder="Password">
-<button onclick="login()">Login</button>
-</div>
-</div>
-
-<!-- APP -->
-<div id="app">
-
-<button class="menu-btn" onclick="openMenu()">☰</button>
-
-<!-- MENU -->
-<div id="menu">
-<div class="profile">
-<h3 id="userEmail">User</h3>
-</div>
-
-<div class="menu-item">📦 Browse Products</div>
-<div class="menu-item">📜 Order History</div>
-<div class="menu-item">👤 Account</div>
-<div class="menu-item">💰 Add Balance</div>
-<div class="menu-item">⚙️ Dashboard</div>
-<div class="menu-item" onclick="logout()">🚪 Logout</div>
-</div>
-
 <header>🚀 Kevin Bot EA Store</header>
 
 <div class="container">
 
+<!-- ITEM -->
 <div class="card">
+<div class="hot">HOT</div>
 <img src="vip.jpg.png">
-<div class="card-body">
-<h3>Kevin Bot EA VIP</h3>
-<p>$35</p>
-<a class="btn" onclick="buy(35)">Buy Now</a>
+<div class="content">
+<div class="category">Forex Trading</div>
+<div class="title">Kevin Bot EA VIP</div>
+
+<div class="price">$35 <span class="old">$50</span></div>
+
+<div class="status">
+<span class="stock">✔ In Stock</span>
+<span class="instant">⚡ Instant</span>
+</div>
+
+<a onclick="buy(35)" class="btn">Buy Now</a>
 </div>
 </div>
 
+<!-- ITEM -->
 <div class="card">
+<div class="hot">HOT</div>
 <img src="scalping.jpg.png">
-<div class="card-body">
-<h3>Pro Scalping</h3>
-<p>$45</p>
-<a class="btn" onclick="buy(45)">Buy Now</a>
+<div class="content">
+<div class="category">Scalping</div>
+<div class="title">Pro Scalping</div>
+
+<div class="price">$45 <span class="old">$60</span></div>
+
+<div class="status">
+<span class="stock">✔ In Stock</span>
+<span class="instant">⚡ Instant</span>
+</div>
+
+<a onclick="buy(45)" class="btn">Buy Now</a>
 </div>
 </div>
 
+<!-- ITEM -->
 <div class="card">
+<div class="hot">HOT</div>
 <img src="auto.jpg.png">
-<div class="card-body">
-<h3>Auto VIP</h3>
-<p>$35</p>
-<a class="btn" onclick="buy(35)">Buy Now</a>
+<div class="content">
+<div class="category">Automation</div>
+<div class="title">Auto VIP</div>
+
+<div class="price">$35 <span class="old">$50</span></div>
+
+<div class="status">
+<span class="stock">✔ In Stock</span>
+<span class="instant">⚡ Instant</span>
+</div>
+
+<a onclick="buy(35)" class="btn">Buy Now</a>
 </div>
 </div>
 
+<!-- ITEM -->
 <div class="card">
+<div class="hot">HOT</div>
 <img src="official.jpg.png">
-<div class="card-body">
-<h3>Official Bot</h3>
-<p>$35</p>
-<a class="btn" onclick="buy(35)">Buy Now</a>
+<div class="content">
+<div class="category">Official</div>
+<div class="title">Official Bot</div>
+
+<div class="price">$35 <span class="old">$50</span></div>
+
+<div class="status">
+<span class="stock">✔ In Stock</span>
+<span class="instant">⚡ Instant</span>
+</div>
+
+<a onclick="buy(35)" class="btn">Buy Now</a>
 </div>
 </div>
 
-</div>
 </div>
 
 <!-- POPUP -->
 <div id="popup">
 <div class="popup-box">
+
 <h2 id="priceText">💰 Pay $35</h2>
 
 <img src="qr.png.jpeg" width="200">
 
 <p>Scan & Pay ABA</p>
 
-<input type="text" id="username" placeholder="@telegram">
-
 <input type="file" id="file"><br><br>
 
-<button onclick="confirmPay()">Submit</button><br><br>
-
 <button onclick="closePopup()">Close</button>
+
 </div>
 </div>
 
 <script>
-function login(){
-let email=document.getElementById("email").value;
-let pass=document.getElementById("pass").value;
-
-if(email && pass){
-document.getElementById("loginBox").style.display="none";
-document.getElementById("app").style.display="block";
-document.getElementById("userEmail").innerText=email;
-}else{
-alert("Enter info");
-}
-}
-
-function logout(){
-location.reload();
-}
-
-function openMenu(){
-document.getElementById("menu").style.left="0";
-}
-
-let currentPrice=35;
-
 function buy(price){
-currentPrice=price;
 document.getElementById("priceText").innerText="💰 Pay $"+price;
 document.getElementById("popup").style.display="flex";
 }
 
 function closePopup(){
 document.getElementById("popup").style.display="none";
-}
-
-async function confirmPay(){
-let file=document.getElementById("file").files[0];
-let username=document.getElementById("username").value;
-
-if(!file){alert("Upload receipt");return;}
-if(!username){alert("Enter Telegram");return;}
-
-let BOT_TOKEN="YOUR_BOT_TOKEN";
-let ADMIN_ID="YOUR_CHAT_ID";
-
-let formData=new FormData();
-formData.append("chat_id",ADMIN_ID);
-formData.append("photo",file);
-formData.append("caption","Payment $"+currentPrice+" User:"+username);
-
-await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`,{
-method:"POST",
-body:formData
-});
-
-alert("Sent to admin");
-closePopup();
 }
 </script>
 

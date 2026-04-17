@@ -171,7 +171,7 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.7);
+background:rgba(0,0,0,0.6);
 justify-content:center;
 align-items:center;
 ">
@@ -179,59 +179,32 @@ align-items:center;
   <div style="
   background:white;
   padding:20px;
-  border-radius:20px;
+  border-radius:15px;
   text-align:center;
-  width:320px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  width:300px;
   ">
 
     <h2>💰 Pay $35</h2>
 
-    <img src="./qr.jpg" style="
-      width:220px;
-      border-radius:10px;
-      margin:10px 0;
-    ">
+    <img src="qr.png" style="width:200px; margin:10px 0;">
 
-    <p style="font-size:13px;color:gray;">
-      Scan QR with ABA / KHQR
-    </p>
-
-    <input type="file" id="file" style="
-      margin-top:10px;
-    ">
+    <input type="file" id="file"><br><br>
 
     <button onclick="confirmPay()" style="
-      margin-top:15px;
-      padding:12px;
-      width:100%;
-      background:#2563eb;
-      color:white;
-      border:none;
-      border-radius:10px;
-      font-size:16px;
+    background:#2563eb;
+    color:white;
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
     ">
-      Confirm Payment
+      Submit
     </button>
 
-    <a id="downloadLink" href="EA.mq5" download style="display:none;">
-      <button style="
-        margin-top:10px;
-        padding:12px;
-        width:100%;
-        background:green;
-        color:white;
-        border:none;
-        border-radius:10px;
-        font-size:16px;
-      ">
-        ⬇ Download Bot
-      </button>
-    </a>
+    <br><br>
+    <button onclick="closePopup()">❌ Close</button>
 
   </div>
 </div>
-
 <script>
 async function confirmPay(){
 

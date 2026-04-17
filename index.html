@@ -18,8 +18,10 @@ header{
   padding:18px;
   font-size:22px;
   font-weight:bold;
+  letter-spacing:1px;
 }
 
+/* GRID */
 .container{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -27,6 +29,7 @@ header{
   padding:15px;
 }
 
+/* CARD */
 .card{
   background:white;
   border-radius:18px;
@@ -37,8 +40,8 @@ header{
 }
 
 .card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 15px 30px rgba(0,0,0,0.2);
+  transform:translateY(-6px);
+  box-shadow:0 15px 35px rgba(0,0,0,0.2);
 }
 
 .card img{
@@ -47,38 +50,7 @@ header{
   object-fit:cover;
 }
 
-.content{
-  padding:12px;
-}
-
-.title{
-  font-weight:bold;
-  font-size:15px;
-}
-
-.price{
-  color:#2563eb;
-  font-size:18px;
-  font-weight:bold;
-}
-
-.old{
-  text-decoration:line-through;
-  color:gray;
-  font-size:13px;
-  margin-left:5px;
-}
-
-.badge{
-  display:inline-block;
-  background:#dcfce7;
-  color:#15803d;
-  padding:4px 10px;
-  border-radius:12px;
-  font-size:12px;
-  margin-top:5px;
-}
-
+/* HOT BADGE */
 .hot{
   position:absolute;
   top:10px;
@@ -90,6 +62,24 @@ header{
   font-size:12px;
 }
 
+/* CONTENT */
+.content{
+  padding:12px;
+}
+
+.title{
+  font-weight:bold;
+  font-size:15px;
+  margin-bottom:5px;
+}
+
+.price{
+  color:#2563eb;
+  font-size:18px;
+  font-weight:bold;
+}
+
+/* BUTTON */
 .btn{
   margin-top:10px;
   display:block;
@@ -100,8 +90,14 @@ header{
   border-radius:12px;
   text-decoration:none;
   font-weight:bold;
+  transition:0.3s;
 }
 
+.btn:hover{
+  background:linear-gradient(90deg,#1d4ed8,#1e40af);
+}
+
+/* POPUP */
 #popup{
   display:none;
   position:fixed;
@@ -120,11 +116,25 @@ header{
   border-radius:15px;
   text-align:center;
   width:320px;
+  animation:pop 0.3s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(0.8);}
+  to{transform:scale(1);}
 }
 
 .popup-box img{
   width:220px;
   border-radius:10px;
+}
+
+input{
+  padding:10px;
+  width:90%;
+  margin-top:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
 }
 </style>
 </head>
@@ -136,8 +146,7 @@ header{
   <img src="vip.jpg.png">
   <div class="content">
     <div class="title">Kevin Bot EA VIP</div>
-    <div class="price">$35 <span class="old">$50</span></div>
-    <div class="badge">✔ In Stock ⚡ Instant</div>
+    <div class="price">$35</div>
     <a href="#" onclick="buy(35)" class="btn">Buy Now</a>
   </div>
 </div>
@@ -146,8 +155,7 @@ header{
   <img src="scalping.jpg.png">
   <div class="content">
     <div class="title">Kevin Bot EA Pro Scalping</div>
-    <div class="price">$45 <span class="old">$50</span></div>
-    <div class="badge">✔ In Stock ⚡ Instant</div>
+    <div class="price">$45</div>
     <a href="#" onclick="buy(45)" class="btn">Buy Now</a>
   </div>
 </div>
@@ -155,8 +163,7 @@ header{
   <img src="auto.jpg.png">
   <div class="content">
     <div class="title">Kevin Bot Trading Auto VIP</div>
-    <div class="price">$35 <span class="old">$50</span></div>
-    <div class="badge">✔ In Stock ⚡ Instant</div>
+    <div class="price">$35</div>
     <a href="#" onclick="buy(35)" class="btn">Buy Now</a>
   </div>
 </div>
@@ -164,26 +171,83 @@ header{
   <img src="official.jpg.png">
   <div class="content">
     <div class="title">Kevin Official Bot EA</div>
-    <div class="price">$35 <span class="old">$50</span></div>
-    <div class="badge">✔ In Stock ⚡ Instant</div>
+    <div class="price">$35</div>
     <a href="#" onclick="buy(35)" class="btn">Buy Now</a>
   </div>
 </div>
 </div>
+<!-- POPUP -->
 <div id="popup">
   <div class="popup-box">
-<h2 id="payText">💰 Pay $35</h2>
+<h2 id="priceText">💰 Pay $35</h2>
 
-<!-- IMPORTANT -->
 <img src="qr.png.jpeg">
 
 <p>Scan & Pay with ABA</p>
 
+<input type="text" id="username" placeholder="Telegram username (@username)">
 <input type="file" id="file"><br><br>
 
-<button onclick="confirmPay()">Submit</button><br><br>
+<button onclick="confirmPay()" class="btn">Submit</button><br><br>
 
 <button onclick="closePopup()">❌ Close</button>
+  </div>
+</div>
+<script>
+let currentPrice = 35;
+
+function buy(price){
+  currentPrice = price;
+  document.getElementById("priceText").innerText = "💰 Pay $" + price;
+  document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup(){
+  document.getElementById("popup").style.display = "none";
+}
+
+async function confirmPay(){
+
+  let file = document.getElementById("file").files[0];
+  let username = document.getElementById("username").value;
+
+  if(!file){
+    alert("❌ Upload receipt first");
+    return;
+  }
+
+  if(!username){
+    alert("❌ Enter Telegram username");
+    return;
+  }
+
+  let BOT_TOKEN = "8355272068:AAFY6kKYYkbZgK9KP_e0_HwO-IhBCCNtzOo";
+  let ADMIN_ID = "8451417510";
+
+  let formData = new FormData();
+  formData.append("chat_id", ADMIN_ID);
+  formData.append("photo", file);
+  formData.append("caption", "💰 Payment $" + currentPrice + "\nUser: " + username);
+
+  await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+    method: "POST",
+    body: formData
+  });
+
+  await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: username.replace("@",""),
+      text: "✅ Payment received!\nDownload EA:\nhttps://yourlink.com/file.zip"
+    })
+  });
+
+  alert("✅ Done! Check Telegram");
+
+  closePopup();
+}
+</script>
 </body>
 </html>
 :::

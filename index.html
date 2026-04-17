@@ -18,10 +18,17 @@ font-size:20px;
 font-weight:bold;
 }
 
-/* VIDEO */
-.video{
-padding:15px;
+/* COUNTDOWN */
+.timer{
+background:#ff3b3b;
+color:white;
+text-align:center;
+padding:10px;
+font-weight:bold;
 }
+
+/* VIDEO */
+.video{padding:15px}
 
 /* GRID */
 .container{
@@ -51,6 +58,17 @@ border-radius:10px;
 font-size:12px;
 }
 
+.vip{
+position:absolute;
+top:10px;
+right:10px;
+background:gold;
+color:black;
+padding:4px 10px;
+border-radius:10px;
+font-size:12px;
+}
+
 .card img{
 width:100%;
 height:130px;
@@ -67,24 +85,13 @@ object-fit:cover;
 text-decoration:line-through;
 color:gray;
 font-size:12px;
-margin-left:5px;
 }
 
-.status{
-display:flex;
-justify-content:space-between;
-margin-top:5px;
+.sold{
 font-size:12px;
+color:green;
+margin-top:3px;
 }
-
-.stock{
-background:#dcfce7;
-color:#15803d;
-padding:3px 8px;
-border-radius:10px;
-}
-
-.instant{color:#f59e0b}
 
 .btn{
 margin-top:10px;
@@ -102,7 +109,6 @@ background:white;
 margin:15px;
 padding:15px;
 border-radius:15px;
-box-shadow:0 5px 15px rgba(0,0,0,0.05);
 }
 
 /* CONTACT */
@@ -114,15 +120,12 @@ background:#2563eb;
 color:white;
 padding:12px;
 border-radius:50%;
-font-size:20px;
 }
 
 /* POPUP */
 #popup{
 display:none;
 position:fixed;
-top:0;
-left:0;
 width:100%;
 height:100%;
 background:rgba(0,0,0,0.6);
@@ -150,14 +153,16 @@ margin-top:10px;
 
 <header>🚀 Kevin Bot EA Store</header>
 
+<!-- COUNTDOWN -->
+<div class="timer">
+🔥 Limited Offer Ends In: <span id="countdown"></span>
+</div>
+
 <!-- VIDEO -->
 <div class="video">
-<h3>🎥 How To Use Bot</h3>
 <iframe width="100%" height="200"
 src="https://www.youtube.com/embed/VIDEO_ID"
-frameborder="0" allowfullscreen
-style="border-radius:10px;">
-</iframe>
+frameborder="0" allowfullscreen></iframe>
 </div>
 
 <!-- STORE -->
@@ -165,14 +170,12 @@ style="border-radius:10px;">
 
 <div class="card">
 <div class="hot">HOT</div>
+<div class="vip">VIP</div>
 <img src="vip.jpg.png">
 <div class="content">
-<div class="title">Kevin Bot EA VIP</div>
+<div class="title">VIP Bot</div>
 <div class="price">$35 <span class="old">$50</span></div>
-<div class="status">
-<span class="stock">✔ In Stock</span>
-<span class="instant">⚡ Instant</span>
-</div>
+<div class="sold">🔥 124 people bought</div>
 <a onclick="buy(35)" class="btn">Buy Now</a>
 </div>
 </div>
@@ -181,41 +184,10 @@ style="border-radius:10px;">
 <div class="hot">HOT</div>
 <img src="scalping.jpg.png">
 <div class="content">
-<div class="title">KevinBot Pro Scalping</div>
+<div class="title">Scalping Pro</div>
 <div class="price">$45 <span class="old">$60</span></div>
-<div class="status">
-<span class="stock">✔ In Stock</span>
-<span class="instant">⚡ Instant</span>
-</div>
+<div class="sold">🔥 89 people bought</div>
 <a onclick="buy(45)" class="btn">Buy Now</a>
-</div>
-</div>
-
-<div class="card">
-<div class="hot">HOT</div>
-<img src="auto.jpg.png">
-<div class="content">
-<div class="title">Auto Trading VIP</div>
-<div class="price">$35 <span class="old">$50</span></div>
-<div class="status">
-<span class="stock">✔ In Stock</span>
-<span class="instant">⚡ Instant</span>
-</div>
-<a onclick="buy(35)" class="btn">Buy Now</a>
-</div>
-</div>
-
-<div class="card">
-<div class="hot">HOT</div>
-<img src="official.jpg.png">
-<div class="content">
-<div class="title">Kevin Bot Premium</div>
-<div class="price">$35 <span class="old">$50</span></div>
-<div class="status">
-<span class="stock">✔ In Stock</span>
-<span class="instant">⚡ Instant</span>
-</div>
-<a onclick="buy(35)" class="btn">Buy Now</a>
 </div>
 </div>
 
@@ -223,9 +195,7 @@ style="border-radius:10px;">
 
 <!-- REVIEW -->
 <div class="review">
-<h3>⭐ User Reviews</h3>
-<p>⭐⭐⭐⭐⭐ Very good bot! Profit daily 💰</p>
-<p>⭐⭐⭐⭐⭐ Easy to use and stable 📊</p>
+⭐⭐⭐⭐⭐ “Best bot I ever used 💰”
 </div>
 
 <!-- CONTACT -->
@@ -235,58 +205,65 @@ style="border-radius:10px;">
 <div id="popup">
 <div class="popup-box">
 
-<h2 id="priceText">💰 Pay $35</h2>
+<h2 id="priceText"></h2>
 
 <img src="qr.png.jpeg" width="200">
 
-<p>Scan & Pay ABA</p>
+<input id="username" placeholder="@telegram username">
+<input type="file" id="file">
 
-<input type="text" id="username" placeholder="@telegram username">
-<input type="file" id="file"><br><br>
-
-<button onclick="confirmPay()">Submit</button><br><br>
+<button onclick="confirmPay()">Submit</button>
 <button onclick="closePopup()">Close</button>
 
 </div>
 </div>
 
 <script>
-let currentPrice = 35;
 
-function buy(price){
-currentPrice = price;
-document.getElementById("priceText").innerText = "💰 Pay $" + price;
-document.getElementById("popup").style.display = "flex";
+// COUNTDOWN
+let time = 3600;
+setInterval(()=>{
+let m = Math.floor(time/60);
+let s = time%60;
+document.getElementById("countdown").innerText = m+":"+s;
+time--;
+},1000);
+
+let currentPrice=35;
+
+function buy(p){
+currentPrice=p;
+document.getElementById("priceText").innerText="$"+p;
+document.getElementById("popup").style.display="flex";
 }
 
 function closePopup(){
-document.getElementById("popup").style.display = "none";
+document.getElementById("popup").style.display="none";
 }
 
 async function confirmPay(){
 
-let file = document.getElementById("file").files[0];
-let username = document.getElementById("username").value;
+let file=document.getElementById("file").files[0];
+let user=document.getElementById("username").value;
 
-if(!file){alert("Upload receipt");return;}
-if(!username){alert("Enter username");return;}
+if(!file||!user){alert("Fill all");return;}
 
-let BOT_TOKEN = "8355272068:AAFY6kKYYkbZgK9KP_e0_HwO-IhBCCNtzOo";
-let CHAT_ID = "8451417510";
+let BOT="PUT_TOKEN";
+let CHAT="PUT_ID";
 
-let formData = new FormData();
-formData.append("chat_id", CHAT_ID);
-formData.append("photo", file);
-formData.append("caption","💰 Payment $" + currentPrice + "\nUser: " + username);
+let form=new FormData();
+form.append("chat_id",CHAT);
+form.append("photo",file);
 
-await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`,{
+await fetch(`https://api.telegram.org/bot${BOT}/sendPhoto`,{
 method:"POST",
-body:formData
+body:form
 });
 
-alert("✅ Sent!");
+alert("Done!");
 closePopup();
 }
+
 </script>
 
 </body>

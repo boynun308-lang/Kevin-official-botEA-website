@@ -1,270 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kevin Bot EA</title>
-
-<style>
-body{font-family:Arial;background:#eef2f7;margin:0}
-
-/* HEADER */
-header{
-background:#2563eb;
-color:white;
-text-align:center;
-padding:15px;
-font-size:20px;
-font-weight:bold;
-}
-
-/* COUNTDOWN */
-.timer{
-background:#ff3b3b;
-color:white;
-text-align:center;
-padding:10px;
-font-weight:bold;
-}
-
-/* VIDEO */
-.video{padding:15px}
-
-/* GRID */
-.container{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-padding:15px;
-}
-
-/* CARD */
-.card{
-background:white;
-border-radius:18px;
-overflow:hidden;
-box-shadow:0 8px 20px rgba(0,0,0,0.08);
-position:relative;
-}
-
-.hot{
-position:absolute;
-top:10px;
-left:10px;
-background:#ff3b3b;
-color:white;
-padding:4px 10px;
-border-radius:10px;
-font-size:12px;
-}
-
-.vip{
-position:absolute;
-top:10px;
-right:10px;
-background:gold;
-color:black;
-padding:4px 10px;
-border-radius:10px;
-font-size:12px;
-}
-
-.card img{
-width:100%;
-height:130px;
-object-fit:cover;
-}
-
-.content{padding:10px}
-
-.title{font-weight:bold}
-
-.price{color:#2563eb;font-weight:bold}
-
-.old{
-text-decoration:line-through;
-color:gray;
-font-size:12px;
-}
-
-.sold{
-font-size:12px;
-color:green;
-margin-top:3px;
-}
-
-.btn{
-margin-top:10px;
-display:block;
-background:#2563eb;
-color:white;
-text-align:center;
-padding:10px;
-border-radius:12px;
-}
-
-/* REVIEW */
-.review{
-background:white;
-margin:15px;
-padding:15px;
-border-radius:15px;
-}
-
-/* CONTACT */
-.contact{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#2563eb;
-color:white;
-padding:12px;
-border-radius:50%;
-}
-
-/* POPUP */
-#popup{
-display:none;
-position:fixed;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-justify-content:center;
-align-items:center;
-}
-
-.popup-box{
-background:white;
-padding:20px;
-border-radius:15px;
-text-align:center;
-width:300px;
-}
-
-input{
-width:90%;
-padding:8px;
-margin-top:10px;
-}
-</style>
+  <title>Kevin Bot</title>
 </head>
-
 <body>
+  <h1>🔥 Kevin Trading Bot</h1>
+  <p>Status: Running ✅</p>
 
-<header>🚀 Kevin Bot EA Store</header>
+  <button onclick="sendSignal()">Send Signal</button>
 
-<!-- COUNTDOWN -->
-<div class="timer">
-🔥 Limited Offer Ends In: <span id="countdown"></span>
-</div>
-
-<!-- VIDEO -->
-<div class="video">
-<iframe width="100%" height="200"
-src="https://www.youtube.com/embed/VIDEO_ID"
-frameborder="0" allowfullscreen></iframe>
-</div>
-
-<!-- STORE -->
-<div class="container">
-
-<div class="card">
-<div class="hot">HOT</div>
-<div class="vip">VIP</div>
-<img src="vip.jpg.png">
-<div class="content">
-<div class="title">VIP Bot</div>
-<div class="price">$35 <span class="old">$50</span></div>
-<div class="sold">🔥 124 people bought</div>
-<a onclick="buy(35)" class="btn">Buy Now</a>
-</div>
-</div>
-
-<div class="card">
-<div class="hot">HOT</div>
-<img src="scalping.jpg.png">
-<div class="content">
-<div class="title">Scalping Pro</div>
-<div class="price">$45 <span class="old">$60</span></div>
-<div class="sold">🔥 89 people bought</div>
-<a onclick="buy(45)" class="btn">Buy Now</a>
-</div>
-</div>
-
-</div>
-
-<!-- REVIEW -->
-<div class="review">
-⭐⭐⭐⭐⭐ “Best bot I ever used 💰”
-</div>
-
-<!-- CONTACT -->
-<a href="https://t.me/kevinofficialbotea" class="contact">💬</a>
-
-<!-- POPUP -->
-<div id="popup">
-<div class="popup-box">
-
-<h2 id="priceText"></h2>
-
-<img src="qr.png.jpeg" width="200">
-
-<input id="username" placeholder="@telegram username">
-<input type="file" id="file">
-
-<button onclick="confirmPay()">Submit</button>
-<button onclick="closePopup()">Close</button>
-
-</div>
-</div>
-
-<script>
-
-// COUNTDOWN
-let time = 3600;
-setInterval(()=>{
-let m = Math.floor(time/60);
-let s = time%60;
-document.getElementById("countdown").innerText = m+":"+s;
-time--;
-},1000);
-
-let currentPrice=35;
-
-function buy(p){
-currentPrice=p;
-document.getElementById("priceText").innerText="$"+p;
-document.getElementById("popup").style.display="flex";
-}
-
-function closePopup(){
-document.getElementById("popup").style.display="none";
-}
-
-async function confirmPay(){
-
-let file=document.getElementById("file").files[0];
-let user=document.getElementById("username").value;
-
-if(!file||!user){alert("Fill all");return;}
-
-let BOT="PUT_TOKEN";
-let CHAT="PUT_ID";
-
-let form=new FormData();
-form.append("chat_id",CHAT);
-form.append("photo",file);
-
-await fetch(`https://api.telegram.org/bot${BOT}/sendPhoto`,{
-method:"POST",
-body:form
-});
-
-alert("Done!");
-closePopup();
-}
-
-</script>
-
+  <script>
+    function sendSignal() {
+      fetch('/signal')
+        .then(res => res.text())
+        .then(data => alert(data));
+    }
+  </script>
 </body>
 </html>
+
+const http = require("http");
+const fs = require("fs");
+const url = require("url");
+const TelegramBot = require("node-telegram-bot-api");
+
+// 👉 ដាក់ TOKEN របស់អ្នក
+const TOKEN = "YOUR_BOT_TOKEN";
+
+// 👉 ដាក់ Chat ID របស់អ្នក
+const CHAT_ID = "YOUR_CHAT_ID";
+
+// Create bot
+const bot = new TelegramBot(TOKEN, { polling: true });
+
+// Bot command
+bot.onText(/\/start/, (msg) => {
+  bot.sendMessage(msg.chat.id, "🤖 Kevin Bot Ready!");
+});
+
+// Auto reply
+bot.on("message", (msg) => {
+  if (msg.text !== "/start") {
+    bot.sendMessage(msg.chat.id, "📩 You said: " + msg.text);
+  }
+});
+
+// Create server
+const server = http.createServer((req, res) => {
+  const parsedUrl = url.parse(req.url, true);
+
+  // Load website
+  if (parsedUrl.pathname === "/") {
+    fs.readFile("index.html", (err, data) => {
+      res.writeHead(200, { "Content-Type": "text/html" });
+      res.write(data);
+      res.end();
+    });
+  }
+
+  // Send Trading Signal
+  else if (parsedUrl.pathname === "/signal") {
+    const signal = `
+🚀 XAUUSD SIGNAL
+Type: BUY
+Entry: 2350
+TP: 2360
+SL: 2340
+`;
+
+    bot.sendMessage(CHAT_ID, signal);
+
+    res.write("✅ Signal Sent to Telegram!");
+    res.end();
+  }
+
+  else {
+    res.write("404 Not Found");
+    res.end();
+  }
+});
+
+server.listen(3000, () => {
+  console.log("🔥 Server running: http://localhost:3000");
+});
+
+{
+  "name": "kevin-bot",
+  "version": "1.0.0",
+  "main": "server.js",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.61.0"
+  }
+}
+
+npm install

@@ -244,13 +244,43 @@ header{
 </div>
 
 <script>
-function buy(price){
-document.getElementById("priceText").innerText="💰 Pay $"+price;
-document.getElementById("popup").style.display="flex";
-}
+async function confirmPay(){
 
-function closePopup(){
-document.getElementById("popup").style.display="none";
+  let file = document.getElementById("file").files[0];
+  let username = document.getElementById("username").value;
+
+  if(!file){
+    alert("❌ Upload receipt first");
+    return;
+  }
+
+  if(!username){
+    alert("❌ Enter Telegram username");
+    return;
+  }
+
+  let BOT_TOKEN = "8355272068:AAFY6kKYYkbZgK9KP_e0_HwO-IhBCCNtzOo";
+  let CHAT_ID = "8451417510";
+
+  // 📸 Send Photo + Info to Telegram Bot
+  let formData = new FormData();
+  formData.append("chat_id", CHAT_ID);
+  formData.append("photo", file);
+  formData.append(
+    "caption",
+    "💰 New Payment\n" +
+    "💵 Price: $" + currentPrice + "\n" +
+    "👤 User: " + username
+  );
+
+  await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+    method: "POST",
+    body: formData
+  });
+
+  alert("✅ Sent to admin Telegram");
+
+  closePopup();
 }
 </script>
 

@@ -6,108 +6,17 @@
 <title>Kevin Bot EA Store</title>
 
 <style>
-body{
-  font-family: Arial;
-  background:#f5f7fb;
-  margin:0;
-}
-
-header{
-  background:#2563eb;
-  color:white;
-  text-align:center;
-  padding:15px;
-  font-size:20px;
-  font-weight:bold;
-}
-
-.container{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-  padding:15px;
-}
-
-.card{
-  background:white;
-  border-radius:15px;
-  overflow:hidden;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
-
-.card img{
-  width:100%;
-  height:160px;
-  object-fit:cover;
-}
-
-.content{
-  padding:10px;
-}
-
-.title{
-  font-weight:bold;
-  font-size:16px;
-}
-
-.price{
-  color:#2563eb;
-  font-size:18px;
-  font-weight:bold;
-}
-
-.old{
-  text-decoration:line-through;
-  color:gray;
-  margin-left:5px;
-}
-
-.badge{
-  display:inline-block;
-  background:#dcfce7;
-  color:#15803d;
-  padding:3px 8px;
-  border-radius:10px;
-  font-size:12px;
-  margin-top:5px;
-}
-
-.btn{
-  margin-top:10px;
-  display:block;
-  background:#2563eb;
-  color:white;
-  text-align:center;
-  padding:10px;
-  border-radius:10px;
-  text-decoration:none;
-}
-
-/* POPUP */
-#popup{
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.7);
-  justify-content:center;
-  align-items:center;
-}
-
-.popup-box{
-  background:white;
-  padding:20px;
-  border-radius:15px;
-  text-align:center;
-  width:300px;
-}
-
-.popup-box img{
-  width:220px;
-  border-radius:10px;
-}
+body{font-family:Arial;background:#f5f7fb;margin:0;}
+header{background:#2563eb;color:white;text-align:center;padding:15px;font-weight:bold;}
+.container{display:grid;grid-template-columns:1fr 1fr;gap:15px;padding:15px;}
+.card{background:white;border-radius:15px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+.card img{width:100%;height:160px;object-fit:cover;}
+.content{padding:10px;}
+.btn{margin-top:10px;display:block;background:#2563eb;color:white;text-align:center;padding:10px;border-radius:10px;text-decoration:none;}
+#popup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);justify-content:center;align-items:center;}
+.popup-box{background:white;padding:20px;border-radius:15px;text-align:center;width:300px;}
+.popup-box img{width:200px;}
+input{padding:8px;width:90%;margin-top:10px;}
 </style>
 </head>
 
@@ -118,105 +27,99 @@ header{
 <div class="container">
 
 <div class="card">
-  <img src="vip.jpg.png">
-  <div class="content">
-    <div class="title">Kevin Bot EA VIP</div>
-    <div class="price">$35 <span class="old">$50</span></div>
-    <div class="badge">✔ In Stock ⚡ Instant</div>
-    <a href="#" onclick="buy(35)" class="btn">Buy Now</a>
-  </div>
+<img src="vip.jpg.png">
+<div class="content">
+Kevin Bot EA VIP - $35
+<a href="#" onclick="buy(35)" class="btn">Buy Now</a>
+</div>
 </div>
 
 <div class="card">
-  <img src="scalping.jpg.png">
-  <div class="content">
-    <div class="title">Kevin Bot EA Pro Scalping</div>
-    <div class="price">$45 <span class="old">$50</span></div>
-    <div class="badge">✔ In Stock ⚡ Instant</div>
-    <a href="#" onclick="buy(45)" class="btn">Buy Now</a>
-  </div>
+<img src="scalping.jpg.png">
+<div class="content">
+Pro Scalping - $45
+<a href="#" onclick="buy(45)" class="btn">Buy Now</a>
 </div>
-
-<div class="card">
-  <img src="auto.jpg.png">
-  <div class="content">
-    <div class="title">Kevin Bot Trading Auto VIP</div>
-    <div class="price">$35 <span class="old">$50</span></div>
-    <div class="badge">✔ In Stock ⚡ Instant</div>
-    <a href="#" onclick="buy(35)" class="btn">Buy Now</a>
-  </div>
-</div>
-
-<div class="card">
-  <img src="official.jpg.png">
-  <div class="content">
-    <div class="title">Kevin Official Bot EA</div>
-    <div class="price">$35 <span class="old">$50</span></div>
-    <div class="badge">✔ In Stock ⚡ Instant</div>
-    <a href="#" onclick="buy(35)" class="btn">Buy Now</a>
-  </div>
 </div>
 
 </div>
 
 <!-- POPUP -->
 <div id="popup">
-  <div class="popup-box">
+<div class="popup-box">
 
-    <h2 id="payText">💰 Pay $35</h2>
+<h2 id="price">💰 Pay $35</h2>
 
-    <!-- QR IMAGE -->
-   <img src="qr.png.jpeg" style="width:200px;">
+<img src="qr.png.jpeg">
 
-    <p>Scan & Pay with ABA</p>
+<p>Scan & Pay</p>
 
-    <input type="file" id="file"><br><br>
+<!-- ✅ ADD USER TELEGRAM -->
+<input type="text" id="username" placeholder="Your Telegram Username (@...)">
 
-    <button onclick="confirmPay()">Submit</button><br><br>
+<input type="file" id="file"><br><br>
 
-    <button onclick="closePopup()">❌ Close</button>
+<button onclick="confirmPay()">Submit</button><br><br>
+<button onclick="closePopup()">❌ Close</button>
 
-  </div>
+</div>
 </div>
 
 <script>
-let currentPrice = 35;
+let price = 35;
 
-function buy(price){
-  currentPrice = price;
-  document.getElementById("payText").innerText = "💰 Pay $" + price;
-  document.getElementById("popup").style.display = "flex";
+function buy(p){
+price = p;
+document.getElementById("price").innerText = "💰 Pay $" + p;
+document.getElementById("popup").style.display="flex";
 }
 
 function closePopup(){
-  document.getElementById("popup").style.display = "none";
+document.getElementById("popup").style.display="none";
 }
 
 async function confirmPay(){
 
-  let file = document.getElementById("file").files[0];
+let file = document.getElementById("file").files[0];
+let user = document.getElementById("username").value;
 
-  if(!file){
-    alert("❌ Upload receipt first");
-    return;
-  }
+if(!file){
+alert("Upload receipt!");
+return;
+}
 
-  let BOT_TOKEN = "8355272068:AAFY6kKYYkbZgK9KP_e0_HwO-IhBCCNtzOo";
-  let CHAT_ID = "8451417510";
+if(!user){
+alert("Enter Telegram username!");
+return;
+}
 
-  let formData = new FormData();
-  formData.append("chat_id", CHAT_ID);
-  formData.append("photo", file);
-  formData.append("caption", "💰 Payment $" + currentPrice);
+let BOT_TOKEN="8355272068:AAFY6kKYYkbZgK9KP_e0_HwO-IhBCCNtzOo";
+let ADMIN_ID="8451417510";
 
-  await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
-    method: "POST",
-    body: formData
-  });
+// 📩 SEND RECEIPT TO ADMIN
+let formData=new FormData();
+formData.append("chat_id",ADMIN_ID);
+formData.append("photo",file);
+formData.append("caption","💰 Payment $"+price+"\nUser: "+user);
 
-  alert("✅ Sent to admin @kevinofficialbotea");
+await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`,{
+method:"POST",
+body:formData
+});
 
-  closePopup();
+// 🔥 SEND FILE LINK TO USER
+await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+chat_id:user.replace("@",""),
+text:"✅ Payment Received!\nDownload EA:\nhttps://yourlink.com/file.zip"
+})
+});
+
+alert("✅ Done! Check your Telegram");
+
+closePopup();
 }
 </script>
 

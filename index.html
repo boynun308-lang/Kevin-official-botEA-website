@@ -233,24 +233,31 @@ align-items:center;
 </div>
 
 <script>
+async function confirmPay(){
 
-<script>
-function buy(){
-  document.getElementById("popup").style.display="flex";
-}
+  let file = document.getElementById("file").files[0];
 
-function confirmPay(){
-  let file = document.getElementById("file").files.length;
-
-  if(file == 0){
+  if(!file){
     alert("❌ Upload receipt first");
-  }else{
-    alert("✅ Payment confirmed");
-    document.getElementById("downloadLink").style.display="block";
+    return;
   }
+
+  let BOT_TOKEN = "8355272068:AAFY6kKYYkbZgK9KP_e0_HwO-IhBCCNtzOo";
+  let CHAT_ID = "8451417510";
+
+  let formData = new FormData();
+  formData.append("chat_id", CHAT_ID);
+  formData.append("photo", file);
+  formData.append("caption", "💰 New Payment Receipt ($35)");
+
+  await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+    method: "POST",
+    body: formData
+  });
+
+  alert("✅ Sent to admin! Wait for approval.");
+
 }
 </script>
-</script>
-
 </body>
 </html>

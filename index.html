@@ -4,64 +4,104 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kevin Bot EA Store</title>
-
 <style>
-body{font-family:Arial;background:#f5f7fb;margin:0;}
+body{
+  font-family:Arial;
+  background:linear-gradient(135deg,#eef2ff,#f8fafc);
+  margin:0;
+}
 
 header{
-  background:#2563eb;
+  background:linear-gradient(90deg,#2563eb,#1e40af);
   color:white;
   text-align:center;
-  padding:15px;
-  font-size:20px;
+  padding:18px;
+  font-size:22px;
   font-weight:bold;
 }
 
 .container{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:15px;
+  gap:18px;
   padding:15px;
 }
 
 .card{
   background:white;
-  border-radius:15px;
+  border-radius:18px;
   overflow:hidden;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  transition:0.3s;
+  position:relative;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 15px 30px rgba(0,0,0,0.2);
 }
 
 .card img{
   width:100%;
-  height:160px;
+  height:170px;
   object-fit:cover;
 }
 
 .content{
-  padding:10px;
+  padding:12px;
 }
 
 .title{
   font-weight:bold;
+  font-size:15px;
 }
 
 .price{
   color:#2563eb;
+  font-size:18px;
   font-weight:bold;
+}
+
+.old{
+  text-decoration:line-through;
+  color:gray;
+  font-size:13px;
+  margin-left:5px;
+}
+
+.badge{
+  display:inline-block;
+  background:#dcfce7;
+  color:#15803d;
+  padding:4px 10px;
+  border-radius:12px;
+  font-size:12px;
+  margin-top:5px;
+}
+
+.hot{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:red;
+  color:white;
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
 }
 
 .btn{
   margin-top:10px;
   display:block;
-  background:#2563eb;
+  background:linear-gradient(90deg,#2563eb,#1d4ed8);
   color:white;
   text-align:center;
-  padding:10px;
-  border-radius:10px;
+  padding:12px;
+  border-radius:12px;
   text-decoration:none;
+  font-weight:bold;
 }
 
-/* POPUP */
 #popup{
   display:none;
   position:fixed;
@@ -79,148 +119,71 @@ header{
   padding:20px;
   border-radius:15px;
   text-align:center;
-  width:300px;
+  width:320px;
 }
 
 .popup-box img{
-  width:200px;
-}
-
-input{
-  padding:8px;
-  width:90%;
-  margin-top:10px;
+  width:220px;
+  border-radius:10px;
 }
 </style>
 </head>
-
 <body>
-
 <header>🚀 Kevin Bot EA Store</header>
-
 <div class="container">
-
-<!-- VIP -->
 <div class="card">
+  <div class="hot">🔥 HOT</div>
   <img src="vip.jpg.png">
   <div class="content">
     <div class="title">Kevin Bot EA VIP</div>
-    <div class="price">$35</div>
+    <div class="price">$35 <span class="old">$50</span></div>
+    <div class="badge">✔ In Stock ⚡ Instant</div>
     <a href="#" onclick="buy(35)" class="btn">Buy Now</a>
   </div>
 </div>
-
-<!-- Scalping -->
 <div class="card">
+  <div class="hot">🔥 HOT</div>
   <img src="scalping.jpg.png">
   <div class="content">
     <div class="title">Kevin Bot EA Pro Scalping</div>
-    <div class="price">$45</div>
+    <div class="price">$45 <span class="old">$50</span></div>
+    <div class="badge">✔ In Stock ⚡ Instant</div>
     <a href="#" onclick="buy(45)" class="btn">Buy Now</a>
   </div>
 </div>
-
-<!-- Auto VIP -->
 <div class="card">
   <img src="auto.jpg.png">
   <div class="content">
     <div class="title">Kevin Bot Trading Auto VIP</div>
-    <div class="price">$35</div>
+    <div class="price">$35 <span class="old">$50</span></div>
+    <div class="badge">✔ In Stock ⚡ Instant</div>
     <a href="#" onclick="buy(35)" class="btn">Buy Now</a>
   </div>
 </div>
-
-<!-- Official -->
 <div class="card">
   <img src="official.jpg.png">
   <div class="content">
     <div class="title">Kevin Official Bot EA</div>
-    <div class="price">$35</div>
+    <div class="price">$35 <span class="old">$50</span></div>
+    <div class="badge">✔ In Stock ⚡ Instant</div>
     <a href="#" onclick="buy(35)" class="btn">Buy Now</a>
   </div>
 </div>
-
 </div>
-
-<!-- POPUP -->
 <div id="popup">
   <div class="popup-box">
+<h2 id="payText">💰 Pay $35</h2>
 
-    <h2 id="priceText">💰 Pay $35</h2>
+<!-- IMPORTANT -->
+<img src="qr.png.jpeg">
 
-    <img src="qr.png.jpeg">
+<p>Scan & Pay with ABA</p>
 
-    <p>Scan & Pay with ABA</p>
+<input type="file" id="file"><br><br>
 
-    <!-- Telegram Username -->
-    <input type="text" id="username" placeholder="Telegram username (@username)">
+<button onclick="confirmPay()">Submit</button><br><br>
 
-    <input type="file" id="file"><br><br>
-
-    <button onclick="confirmPay()">Submit</button><br><br>
-
-    <button onclick="closePopup()">❌ Close</button>
-
-  </div>
-</div>
-
-<script>
-let currentPrice = 35;
-
-function buy(price){
-  currentPrice = price;
-  document.getElementById("priceText").innerText = "💰 Pay $" + price;
-  document.getElementById("popup").style.display = "flex";
-}
-
-function closePopup(){
-  document.getElementById("popup").style.display = "none";
-}
-
-async function confirmPay(){
-
-  let file = document.getElementById("file").files[0];
-  let username = document.getElementById("username").value;
-
-  if(!file){
-    alert("❌ Upload receipt first");
-    return;
-  }
-
-  if(!username){
-    alert("❌ Enter Telegram username");
-    return;
-  }
-
-  let BOT_TOKEN = "8355272068:AAFY6kKYYkbZgK9KP_e0_HwO-IhBCCNtzOo";
-  let ADMIN_ID = "8451417510";
-
-  // SEND RECEIPT TO ADMIN
-  let formData = new FormData();
-  formData.append("chat_id", ADMIN_ID);
-  formData.append("photo", file);
-  formData.append("caption", "💰 Payment $" + currentPrice + "\nUser: " + username);
-
-  await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
-    method: "POST",
-    body: formData
-  });
-
-  // AUTO SEND LINK TO USER
-  await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      chat_id: username.replace("@",""),
-      text: "✅ Payment received!\nDownload EA:\nhttps://yourlink.com/file.zip"
-    })
-  });
-
-  alert("✅ Done! Check Telegram");
-
-  closePopup();
-}
-</script>
-
+<button onclick="closePopup()">❌ Close</button>
 </body>
 </html>
+:::

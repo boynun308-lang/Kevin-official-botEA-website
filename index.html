@@ -105,9 +105,9 @@ header{
 }
 
 .popup-box img{
-  width:200px;
+  width:220px;
+  border-radius:10px;
 }
-
 </style>
 </head>
 
@@ -117,95 +117,81 @@ header{
 
 <div class="container">
 
-<!-- VIP -->
 <div class="card">
   <img src="vip.jpg.png">
   <div class="content">
     <div class="title">Kevin Bot EA VIP</div>
     <div class="price">$35 <span class="old">$50</span></div>
     <div class="badge">✔ In Stock ⚡ Instant</div>
-    <a href="#" onclick="buy()" class="btn">Buy Now</a>
+    <a href="#" onclick="buy(35)" class="btn">Buy Now</a>
   </div>
 </div>
 
-<!-- Scalping -->
 <div class="card">
   <img src="scalping.jpg.png">
   <div class="content">
     <div class="title">Kevin Bot EA Pro Scalping</div>
     <div class="price">$45 <span class="old">$50</span></div>
     <div class="badge">✔ In Stock ⚡ Instant</div>
-    <a href="#" onclick="buy()" class="btn">Buy Now</a>
+    <a href="#" onclick="buy(45)" class="btn">Buy Now</a>
   </div>
 </div>
 
-<!-- Auto -->
 <div class="card">
   <img src="auto.jpg.png">
   <div class="content">
     <div class="title">Kevin Bot Trading Auto VIP</div>
     <div class="price">$35 <span class="old">$50</span></div>
     <div class="badge">✔ In Stock ⚡ Instant</div>
-    <a href="#" onclick="buy()" class="btn">Buy Now</a>
+    <a href="#" onclick="buy(35)" class="btn">Buy Now</a>
   </div>
 </div>
 
-<!-- Official -->
 <div class="card">
   <img src="official.jpg.png">
   <div class="content">
     <div class="title">Kevin Official Bot EA</div>
     <div class="price">$35 <span class="old">$50</span></div>
     <div class="badge">✔ In Stock ⚡ Instant</div>
-    <a href="#" onclick="buy()" class="btn">Buy Now</a>
+    <a href="#" onclick="buy(35)" class="btn">Buy Now</a>
   </div>
 </div>
 
 </div>
 
 <!-- POPUP -->
-<div id="popup" style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-justify-content:center;
-align-items:center;
-">
+<div id="popup">
+  <div class="popup-box">
 
-  <div style="
-  background:white;
-  padding:20px;
-  border-radius:15px;
-  text-align:center;
-  width:300px;
-  ">
+    <h2 id="payText">💰 Pay $35</h2>
 
-    <h2>💰 Pay $35</h2>
+    <!-- QR IMAGE -->
+    <img src="qr.png">
 
-    <img src="qr.png" style="width:200px; margin:10px 0;">
+    <p>Scan & Pay with ABA</p>
 
     <input type="file" id="file"><br><br>
 
-    <button onclick="confirmPay()" style="
-    background:#2563eb;
-    color:white;
-    padding:10px 20px;
-    border:none;
-    border-radius:10px;
-    ">
-      Submit
-    </button>
+    <button onclick="confirmPay()">Submit</button><br><br>
 
-    <br><br>
     <button onclick="closePopup()">❌ Close</button>
 
   </div>
 </div>
+
 <script>
+let currentPrice = 35;
+
+function buy(price){
+  currentPrice = price;
+  document.getElementById("payText").innerText = "💰 Pay $" + price;
+  document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup(){
+  document.getElementById("popup").style.display = "none";
+}
+
 async function confirmPay(){
 
   let file = document.getElementById("file").files[0];
@@ -221,16 +207,18 @@ async function confirmPay(){
   let formData = new FormData();
   formData.append("chat_id", CHAT_ID);
   formData.append("photo", file);
-  formData.append("caption", "💰 New Payment Receipt ($35)");
+  formData.append("caption", "💰 Payment $" + currentPrice);
 
   await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
     method: "POST",
     body: formData
   });
 
-  alert("✅ Sent to admin! Wait for approval.");
+  alert("✅ Sent to admin @kevinofficialbotea");
 
+  closePopup();
 }
 </script>
+
 </body>
 </html>

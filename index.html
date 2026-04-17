@@ -12,7 +12,6 @@ body{
   margin:0;
 }
 
-/* HEADER */
 header{
   background:#2563eb;
   color:white;
@@ -22,7 +21,6 @@ header{
   font-weight:bold;
 }
 
-/* GRID */
 .container{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -30,7 +28,6 @@ header{
   padding:15px;
 }
 
-/* CARD */
 .card{
   background:white;
   border-radius:18px;
@@ -39,7 +36,6 @@ header{
   position:relative;
 }
 
-/* HOT BADGE */
 .hot{
   position:absolute;
   top:10px;
@@ -52,14 +48,12 @@ header{
   font-weight:bold;
 }
 
-/* IMAGE */
 .card img{
   width:100%;
   height:130px;
   object-fit:cover;
 }
 
-/* CONTENT */
 .content{
   padding:10px;
 }
@@ -71,13 +65,11 @@ header{
 
 .title{
   font-weight:bold;
-  margin-top:3px;
 }
 
 .price{
   color:#2563eb;
   font-weight:bold;
-  font-size:16px;
 }
 
 .old{
@@ -87,7 +79,6 @@ header{
   margin-left:5px;
 }
 
-/* STATUS */
 .status{
   display:flex;
   justify-content:space-between;
@@ -106,7 +97,6 @@ header{
   color:#f59e0b;
 }
 
-/* BUTTON */
 .btn{
   margin-top:10px;
   display:block;
@@ -116,10 +106,8 @@ header{
   padding:10px;
   border-radius:12px;
   text-decoration:none;
-  font-weight:bold;
 }
 
-/* POPUP */
 #popup{
   display:none;
   position:fixed;
@@ -139,6 +127,12 @@ header{
   text-align:center;
   width:300px;
 }
+
+input{
+  width:90%;
+  padding:8px;
+  margin-top:10px;
+}
 </style>
 </head>
 
@@ -148,78 +142,62 @@ header{
 
 <div class="container">
 
-<!-- ITEM -->
 <div class="card">
 <div class="hot">HOT</div>
 <img src="vip.jpg.png">
 <div class="content">
 <div class="category">Forex Trading</div>
 <div class="title">Kevin Bot EA VIP</div>
-
 <div class="price">$35 <span class="old">$50</span></div>
-
 <div class="status">
 <span class="stock">✔ In Stock</span>
 <span class="instant">⚡ Instant</span>
 </div>
-
 <a onclick="buy(35)" class="btn">Buy Now</a>
 </div>
 </div>
 
-<!-- ITEM -->
 <div class="card">
 <div class="hot">HOT</div>
 <img src="scalping.jpg.png">
 <div class="content">
 <div class="category">Scalping</div>
 <div class="title">KevinBot Pro Scalping</div>
-
 <div class="price">$45 <span class="old">$60</span></div>
-
 <div class="status">
 <span class="stock">✔ In Stock</span>
 <span class="instant">⚡ Instant</span>
 </div>
-
 <a onclick="buy(45)" class="btn">Buy Now</a>
 </div>
 </div>
 
-<!-- ITEM -->
 <div class="card">
 <div class="hot">HOT</div>
 <img src="auto.jpg.png">
 <div class="content">
 <div class="category">Automation</div>
-<div class="title">Kevin Bot EA AutoTrading  VIP</div>
-
+<div class="title">Kevin Bot EA AutoTrading VIP</div>
 <div class="price">$35 <span class="old">$50</span></div>
-
 <div class="status">
 <span class="stock">✔ In Stock</span>
 <span class="instant">⚡ Instant</span>
 </div>
-
 <a onclick="buy(35)" class="btn">Buy Now</a>
 </div>
 </div>
 
-<!-- ITEM -->
 <div class="card">
 <div class="hot">HOT</div>
 <img src="official.jpg.png">
 <div class="content">
 <div class="category">Official</div>
-<div class="title">Kevin BotPremium</div>
-
+<div class="title">Kevin Bot Premium</div>
 <div class="price">$35 <span class="old">$50</span></div>
-
 <div class="status">
 <span class="stock">✔ In Stock</span>
 <span class="instant">⚡ Instant</span>
 </div>
-
 <a onclick="buy(35)" class="btn">Buy Now</a>
 </div>
 </div>
@@ -236,14 +214,28 @@ header{
 
 <p>Scan & Pay ABA</p>
 
+<input type="text" id="username" placeholder="@telegram username">
 <input type="file" id="file"><br><br>
 
+<button onclick="confirmPay()">Submit</button><br><br>
 <button onclick="closePopup()">Close</button>
 
 </div>
 </div>
 
 <script>
+let currentPrice = 35;
+
+function buy(price){
+  currentPrice = price;
+  document.getElementById("priceText").innerText = "💰 Pay $" + price;
+  document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup(){
+  document.getElementById("popup").style.display = "none";
+}
+
 async function confirmPay(){
 
   let file = document.getElementById("file").files[0];
@@ -262,15 +254,12 @@ async function confirmPay(){
   let BOT_TOKEN = "8355272068:AAFY6kKYYkbZgK9KP_e0_HwO-IhBCCNtzOo";
   let CHAT_ID = "8451417510";
 
-  // 📸 Send Photo + Info to Telegram Bot
   let formData = new FormData();
   formData.append("chat_id", CHAT_ID);
   formData.append("photo", file);
   formData.append(
     "caption",
-    "💰 New Payment\n" +
-    "💵 Price: $" + currentPrice + "\n" +
-    "👤 User: " + username
+    "💰 New Payment\n💵 Price: $" + currentPrice + "\n👤 User: " + username
   );
 
   await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {

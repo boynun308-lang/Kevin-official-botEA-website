@@ -19,9 +19,7 @@ font-weight:bold;
 }
 
 /* VIDEO */
-.video{
-padding:15px;
-}
+.video{padding:15px}
 
 /* GRID */
 .container{
@@ -38,6 +36,11 @@ border-radius:18px;
 overflow:hidden;
 box-shadow:0 8px 20px rgba(0,0,0,0.08);
 position:relative;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
 }
 
 .hot{
@@ -70,6 +73,24 @@ font-size:12px;
 margin-left:5px;
 }
 
+/* ⭐ Rating */
+.rating{
+font-size:12px;
+margin-top:5px;
+color:#f59e0b;
+}
+
+/* 📋 FEATURES */
+.features{
+font-size:12px;
+color:#555;
+margin-top:5px;
+padding-left:15px;
+}
+
+.features li{margin-bottom:3px}
+
+/* STATUS */
 .status{
 display:flex;
 justify-content:space-between;
@@ -86,6 +107,7 @@ border-radius:10px;
 
 .instant{color:#f59e0b}
 
+/* BUTTON */
 .btn{
 margin-top:10px;
 display:block;
@@ -94,7 +116,11 @@ color:white;
 text-align:center;
 padding:10px;
 border-radius:12px;
+cursor:pointer;
+transition:0.3s;
 }
+
+.btn:hover{background:#1d4ed8}
 
 /* REVIEW */
 .review{
@@ -138,11 +164,41 @@ text-align:center;
 width:300px;
 }
 
+/* INPUT MODERN */
 input{
 width:90%;
-padding:8px;
+padding:10px;
 margin-top:10px;
+border-radius:10px;
+border:1px solid #ccc;
 }
+
+/* FILE STYLE */
+.file-label{
+display:block;
+background:#f3f4f6;
+padding:10px;
+border-radius:10px;
+margin-top:10px;
+cursor:pointer;
+}
+
+.file-label input{display:none}
+
+/* SUBMIT */
+.submit-btn{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+background:#2563eb;
+color:white;
+margin-top:10px;
+cursor:pointer;
+}
+
+.submit-btn:hover{background:#1d4ed8}
+
 </style>
 </head>
 
@@ -150,72 +206,39 @@ margin-top:10px;
 
 <header>🚀 Kevin Bot EA Store</header>
 
-<!-- VIDEO -->
 <div class="video">
 <h3>🎥 How To Use Bot</h3>
 <iframe width="100%" height="200"
 src="https://www.youtube.com/embed/VIDEO_ID"
 frameborder="0" allowfullscreen
-style="border-radius:10px;">
-</iframe>
+style="border-radius:10px;"></iframe>
 </div>
 
-<!-- STORE -->
 <div class="container">
 
+<!-- CARD -->
 <div class="card">
 <div class="hot">HOT</div>
 <img src="vip.jpg.png">
 <div class="content">
 <div class="title">Kevin Bot EA VIP</div>
 <div class="price">$35 <span class="old">$50</span></div>
+
+<div class="rating">⭐⭐⭐⭐⭐ (120 reviews)</div>
+
+<ul class="features">
+<li>📈 Winrate 80%+</li>
+<li>⚡ Fast Scalping</li>
+<li>🤖 Auto Trade</li>
+<li>🛡️ Safe SL/TP</li>
+</ul>
+
 <div class="status">
 <span class="stock">✔ In Stock</span>
 <span class="instant">⚡ Instant</span>
-</div>
-<a onclick="buy(35)" class="btn">Buy Now</a>
-</div>
 </div>
 
-<div class="card">
-<div class="hot">HOT</div>
-<img src="scalping.jpg.png">
-<div class="content">
-<div class="title">KevinBot Pro Scalping</div>
-<div class="price">$45 <span class="old">$60</span></div>
-<div class="status">
-<span class="stock">✔ In Stock</span>
-<span class="instant">⚡ Instant</span>
-</div>
-<a onclick="buy(45)" class="btn">Buy Now</a>
-</div>
-</div>
-
-<div class="card">
-<div class="hot">HOT</div>
-<img src="auto.jpg.png">
-<div class="content">
-<div class="title">Auto Trading VIP</div>
-<div class="price">$35 <span class="old">$50</span></div>
-<div class="status">
-<span class="stock">✔ In Stock</span>
-<span class="instant">⚡ Instant</span>
-</div>
-<a onclick="buy(35)" class="btn">Buy Now</a>
-</div>
-</div>
-
-<div class="card">
-<div class="hot">HOT</div>
-<img src="official.jpg.png">
-<div class="content">
-<div class="title">Kevin Bot Premium</div>
-<div class="price">$35 <span class="old">$50</span></div>
-<div class="status">
-<span class="stock">✔ In Stock</span>
-<span class="instant">⚡ Instant</span>
-</div>
-<a onclick="buy(35)" class="btn">Buy Now</a>
+<div onclick="buy(35)" class="btn">Buy Now</div>
 </div>
 </div>
 
@@ -224,11 +247,10 @@ style="border-radius:10px;">
 <!-- REVIEW -->
 <div class="review">
 <h3>⭐ User Reviews</h3>
-<p>⭐⭐⭐⭐⭐ Very good bot! Profit daily 💰</p>
-<p>⭐⭐⭐⭐⭐ Easy to use and stable 📊</p>
+<p>⭐⭐⭐⭐⭐ Profit daily 💰</p>
+<p>⭐⭐⭐⭐⭐ Easy & stable 📊</p>
 </div>
 
-<!-- CONTACT -->
 <a href="https://t.me/kevinofficialbotea" class="contact">💬</a>
 
 <!-- POPUP -->
@@ -242,9 +264,14 @@ style="border-radius:10px;">
 <p>Scan & Pay ABA</p>
 
 <input type="text" id="username" placeholder="@telegram username">
-<input type="file" id="file"><br><br>
 
-<button onclick="confirmPay()">Submit</button><br><br>
+<label class="file-label">
+📎 Upload Payment Screenshot
+<input type="file" id="file">
+</label>
+
+<button onclick="confirmPay()" class="submit-btn">Submit Payment</button>
+
 <button onclick="closePopup()">Close</button>
 
 </div>
